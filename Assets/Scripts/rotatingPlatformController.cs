@@ -3,26 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class rotatingPlatformController : MonoBehaviour {
-	public float rotationRate = 150f;
-
-	public float rotation = 0.0f;
-
+public class rotatingPlatformController : MonoBehaviour, Pausable {
+	private Rigidbody2D myRigidbody;
+	public float angularVelocity = 17;
 	// Use this for initialization
 	void Start () {
-		Rigidbody2D myRigidbody = (Rigidbody2D)this.GetComponent<Rigidbody2D>();
-		myRigidbody.angularVelocity = 17;
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-		//transform.Rotate(new Vector3(0, 0, 1) * speedMultiplier);
-		//rotation += rotationRate * Time.deltaTime;
-
+		myRigidbody = (Rigidbody2D)this.GetComponent<Rigidbody2D>();
+		myRigidbody.angularVelocity = angularVelocity;
 	}
 
-	public float getRotation()
+	public void Pause()
 	{
-		return rotation;
+		myRigidbody.angularVelocity = 0;
 	}
+
+	public void Unpause()
+	{
+		myRigidbody.angularVelocity = angularVelocity;
+	}
+
 }

@@ -11,7 +11,7 @@ public class rotatingPlatformStayFlat : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 		/*Rigidbody2D myRigidbody = (Rigidbody2D)this.GetComponent<Rigidbody2D>();
 		myRigidbody.angularVelocity = 100;//-17;*/
