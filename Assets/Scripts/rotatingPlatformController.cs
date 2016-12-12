@@ -10,15 +10,15 @@ public class rotatingPlatformController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		Rigidbody2D myRigidbody = (Rigidbody2D)this.GetComponent<Rigidbody2D>();
+		myRigidbody.angularVelocity = 17;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		//transform.Rotate(new Vector3(0, 0, 1) * speedMultiplier);
 		//rotation += rotationRate * Time.deltaTime;
-		Rigidbody2D myRigidbody = (Rigidbody2D)this.GetComponent<Rigidbody2D>();
-		myRigidbody.angularVelocity = 17;
+
 	}
 
 	public float getRotation()
