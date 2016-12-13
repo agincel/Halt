@@ -7,10 +7,14 @@ public class cameraController : MonoBehaviour {
 
 	GameObject following;
 	float lerpRate = 0.1f;
+	private Material mat;
+
 	// Use this for initialization
 	void Start () {
 		following = GameObject.FindGameObjectWithTag("Player");
 		Debug.Log(following.name);
+
+		mat = new Material(Shader.Find("ddShaders/dd_Invert"));
 	}
 	
 	// Update is called once per physics update
@@ -25,4 +29,22 @@ public class cameraController : MonoBehaviour {
 			this.transform.position = new Vector3 (myX, myY, this.transform.position.z);
 		}
 	}
+
+	public void OnRenderImage (RenderTexture source, RenderTexture destination)
+	{
+		if (PauseController.isPaused) {
+			mat.SetTexture ("_MainTex", source);
+			Graphics.Blit (source, destination, mat);
+		}
+	}
+
 }
+
+
+
+
+
+
+
+
+

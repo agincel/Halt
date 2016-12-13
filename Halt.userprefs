@@ -1,10 +1,28 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\rotatingPlatformStayFlat.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PauseController.cs">
     <Files>
-      <File FileName="Assets\Scripts\rotatingPlatformController.cs" Line="12" Column="3" />
-      <File FileName="Assets\Scripts\rotatingPlatformStayFlat.cs" Line="14" Column="61" />
+      <File FileName="Assets\Scripts\rotatingPlatformController.cs" Line="7" Column="34" />
+      <File FileName="Assets\Scripts\rotatingPlatformStayFlat.cs" Line="14" Column="12" />
+      <File FileName="Assets\Scripts\myFirstPrefabController.cs" Line="14" Column="39" />
+      <File FileName="Assets\Scripts\PauseController.cs" Line="22" Column="20" />
+      <File FileName="Assets\Scripts\GoalController.cs" Line="19" Column="3" />
+      <File FileName="Assets\Scripts\KillYController.cs" Line="18" Column="34" />
+      <File FileName="Assets\Scripts\cameraController.cs" Line="11" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Halt" expanded="True">
+            <Node name="Assembly-CSharp" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="PauseController.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

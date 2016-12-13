@@ -11,29 +11,55 @@ public interface Pausable
 
 public class PauseController : MonoBehaviour {
 
-	private bool isPaused;
+	public static bool isPaused;
+	public static bool hasStarted;
+	private Rigidbody2D myRigidbody;
+	private bool levelStartPause;
 	// Use this for initialization
 	void Start () {
+		myRigidbody = GetComponent<Rigidbody2D>();
+		myRigidbody.simulated = false;
 		isPaused = false;
+		hasStarted = false;
+		levelStartPause = false;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
 		if (Input.GetButtonDown ("Pause")) {
-			GameObject[] objectsToPause = GameObject.FindGameObjectsWithTag("Pause");
-			var pausables = new List<Pausable>();
-			foreach (GameObject o in objectsToPause) {
-				pausables.Add((Pausable)o.GetComponent(typeof(Pausable)));
-			}
 
-			foreach (Pausable p in pausables) {
-				if (isPaused)
-					p.Unpause();
-				else
-					p.Pause();
+			if (!hasStarted) {	
+				myRigidbody.simulated = true;
+				hasStarted = true;
+				SendPause(false);
+			} else {
+				SendPause(!isPaused);
 			}
-			isPaused = !isPaused;
 		}
+
+
+		if (!hasStarted && !isPaused && !levelStartPause) {
+			SendPause(true);
+			isPaused = false;
+			levelStartPause = true;
+		}
+	}
+
+	public static void SendPause(bool toPause)
+	{
+		GameObject[] objectsToPause = GameObject.FindGameObjectsWithTag ("Pause");
+		var pausables = new List<Pausable> ();
+		foreach (GameObject o in objectsToPause) {
+			pausables.Add ((Pausable)o.GetComponent (typeof(Pausable)));
+		}
+
+		foreach (Pausable p in pausables) {
+			if (!toPause)
+				p.Unpause ();
+			else
+				p.Pause ();
+		}
+		isPaused = toPause;
 	}
 }
