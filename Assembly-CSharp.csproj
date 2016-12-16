@@ -51,8 +51,10 @@
      <Compile Include="Assets\Scripts\PauseController.cs" />
      <Compile Include="Assets\Scripts\cameraController.cs" />
      <Compile Include="Assets\Scripts\myFirstPrefabController.cs" />
+     <Compile Include="Assets\Scripts\pausablePhysicsObjectController.cs" />
      <Compile Include="Assets\Scripts\rotatingPlatformController.cs" />
      <Compile Include="Assets\Scripts\rotatingPlatformStayFlat.cs" />
+     <Compile Include="Assets\hiddenCollectibleController.cs" />
      <None Include="Assets\Shaders\Invert.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

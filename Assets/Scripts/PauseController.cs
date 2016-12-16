@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public interface Pausable
 {
@@ -36,6 +36,10 @@ public class PauseController : MonoBehaviour {
 			} else {
 				SendPause(!isPaused);
 			}
+		}
+
+		if (Input.GetButtonDown("Restart")) {
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name); //restart
 		}
 
 
