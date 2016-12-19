@@ -7,6 +7,7 @@ public interface Pausable
 {
 	void Pause();
 	void Unpause();
+	void getButton();
 }
 
 public class PauseController : MonoBehaviour {
@@ -15,6 +16,11 @@ public class PauseController : MonoBehaviour {
 	public static bool hasStarted;
 	private Rigidbody2D myRigidbody;
 	private bool levelStartPause;
+
+	private Vector2 pastLocation;
+	private Vector2 currentLocation;
+	private int framesToRestart = 100;
+	private int currentRestartFrames = 0;
 	// Use this for initialization
 	void Start () {
 		myRigidbody = GetComponent<Rigidbody2D>();
@@ -22,6 +28,7 @@ public class PauseController : MonoBehaviour {
 		isPaused = false;
 		hasStarted = false;
 		levelStartPause = false;
+		currentLocation = myRigidbody.transform.position;
 	}
 	
 	// Update is called once per frame
@@ -48,14 +55,38 @@ public class PauseController : MonoBehaviour {
 			isPaused = false;
 			levelStartPause = true;
 		}
+
+
+
+		pastLocation = currentLocation;
+		currentLocation = myRigidbody.transform.position;
+		if (hasStarted && pastLocation == currentLocation) { //AUTO RESTART IF STAND STILL FOR OVER X FRAMES
+			currentRestartFrames++;
+			if (currentRestartFrames > framesToRestart) {
+				SceneManager.LoadScene(SceneManager.GetActiveScene().name); //restart
+			}
+		} else if (hasStarted) {
+			currentRestartFrames = 0;
+		}
 	}
 
 	public static void SendPause(bool toPause)
 	{
 		GameObject[] objectsToPause = GameObject.FindGameObjectsWithTag ("Pause");
+
 		var pausables = new List<Pausable> ();
 		foreach (GameObject o in objectsToPause) {
-			pausables.Add ((Pausable)o.GetComponent (typeof(Pausable)));
+			Pausable[] all = o.GetComponents<Pausable>();
+			foreach(Pausable p in all)
+				pausables.Add(p);
+		}
+
+		foreach(Pausable p in GameObject.FindGameObjectWithTag("MainCamera").GetComponents<Pausable>()) { //special case for main camera
+			pausables.Add(p);
+		}
+
+		foreach(Pausable p in GameObject.FindGameObjectWithTag("Player").GetComponents<Pausable>()) { //special case for player
+			pausables.Add(p);
 		}
 
 		foreach (Pausable p in pausables) {

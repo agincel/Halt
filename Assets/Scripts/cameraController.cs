@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraController : MonoBehaviour {
+public class cameraController : MonoBehaviour, Pausable {
 	public bool isFollowing;
 
 	GameObject following;
 	float lerpRate = 0.1f;
-	private Material mat;
 
+	private Camera me;
+
+	private Color start;
+	private Color inverted;
 	// Use this for initialization
 	void Start () {
+		me = GetComponent<Camera>();
 		following = GameObject.FindGameObjectWithTag("Player");
 		Debug.Log(following.name);
 
-		mat = new Material(Shader.Find("ddShaders/dd_Invert"));
+		start = me.backgroundColor;
+		inverted = new Color(1 - start.r, 1 - start.g, 1 - start.b);
 	}
 	
 	// Update is called once per physics update
@@ -30,12 +35,17 @@ public class cameraController : MonoBehaviour {
 		}
 	}
 
-	public void OnRenderImage (RenderTexture source, RenderTexture destination)
-	{
-		if (PauseController.isPaused) {
-			mat.SetTexture ("_MainTex", source);
-			Graphics.Blit (source, destination, mat);
-		}
+	public void Pause() {
+		if (PauseController.hasStarted)
+			me.backgroundColor = inverted;
+	}
+
+	public void Unpause() {
+		me.backgroundColor = start;
+	}
+
+	public void getButton() {
+
 	}
 
 }

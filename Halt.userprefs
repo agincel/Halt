@@ -1,15 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\hiddenCollectibleController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\movingPlatformController.cs">
     <Files>
-      <File FileName="Assets\Scripts\rotatingPlatformStayFlat.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PauseController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GoalController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\KillYController.cs" Line="24" Column="3" />
+      <File FileName="Assets\Scripts\PauseController.cs" Line="32" Column="3" />
+      <File FileName="Assets\Scripts\GoalController.cs" Line="11" Column="114" />
+      <File FileName="Assets\Scripts\KillYController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\cameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\rotatingPlatformController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\rotatingPlatformController.cs" Line="3" Column="19" />
       <File FileName="Assets\Scripts\pausablePhysicsObjectController.cs" Line="1" Column="1" />
-      <File FileName="Assets\hiddenCollectibleController.cs" Line="9" Column="11" />
+      <File FileName="Assets\LeanTween\Examples\Scripts\GeneralBasicCS.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\movingPlatformController.cs" Line="36" Column="72" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -5,18 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GoalController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	void OnTriggerEnter2D(Collider2D collision)
 	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		if (collision.gameObject.tag == "Player")
+			SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
 	}
 }
