@@ -23,6 +23,7 @@ public class movingPlatformController : MonoBehaviour, Pausable {
 	private Rigidbody2D myRigidbody;
 	private Vector2 initialLocation;
 
+	SpriteRenderer mySR;
 
 
 	// Use this for initialization
@@ -30,12 +31,17 @@ public class movingPlatformController : MonoBehaviour, Pausable {
 		myRigidbody = GetComponent<Rigidbody2D>();
 		initialLocation = myRigidbody.position;
 		isPaused = true;
+		mySR = GetComponent<SpriteRenderer>();
 
 		if (timeToMove == 0)
 		{
 			Debug.Log("A moving platform's timeToMove is set to 0. Setting to 1.");
 			timeToMove = 1;
 		}
+
+		if (waitForButton)
+			mySR.color = new Color(mySR.color.r, mySR.color.g, mySR.color.b, 0.5f);
+
 	}
 
 	void FixedUpdate ()
@@ -92,6 +98,7 @@ public class movingPlatformController : MonoBehaviour, Pausable {
 
 	public void getButton() {
 		waitForButton = false;
+		mySR.color = new Color(mySR.color.r, mySR.color.g, mySR.color.b, 1);
 		if (!PauseController.isPaused)
 			Unpause();
 	}

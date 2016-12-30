@@ -6,16 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/Scenes/L1 - Intro.unity
   - enabled: 1
-    path: Assets/Scenes/Level2.unity
+    path: Assets/Scenes/L1_5 - TwoFallingBlocks.unity
   - enabled: 1
-    path: Assets/Scenes/Level3.unity
+    path: Assets/Scenes/L7 - RotPlat1.unity
   - enabled: 1
-    path: Assets/Scenes/Level4.unity
+    path: Assets/Scenes/L8 - RotPlat2.unity
   - enabled: 1
-    path: Assets/Scenes/Level6.unity
+    path: Assets/Scenes/L3 - TwoPath.unity
   - enabled: 1
-    path: Assets/Scenes/Level8.unity
+    path: Assets/Scenes/L2 - ButtonIntro.unity
   - enabled: 1
-    path: Assets/Scenes/RotPlat1.unity
+    path: Assets/Scenes/L4 - LaunchIntro.unity
+  - enabled: 1
+    path: Assets/Scenes/L5 - GetHitIntro.unity
+  - enabled: 1
+    path: Assets/Scenes/FirstMovePlat.unity
+  - enabled: 1
+    path: Assets/Scenes/L6 - MovingPlatSpringIntro.unity
+  - enabled: 1
+    path: Assets/Scenes/L9 - BounceHouse.unity

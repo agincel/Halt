@@ -6,6 +6,7 @@ public class pausablePhysicsObjectController : MonoBehaviour, Pausable {
 
 	Rigidbody2D myRigidbody;
 	private bool isPaused;
+	SpriteRenderer mySR;
 
 	public Vector2 initialLinearVelocity;
 	public float initialAngularVelocity;
@@ -18,11 +19,16 @@ public class pausablePhysicsObjectController : MonoBehaviour, Pausable {
 	private Vector2 storedLinearVelocity;
 	// Use this for initialization
 	void Start () {
+		mySR = this.GetComponent<SpriteRenderer>();
 		myRigidbody = this.GetComponent<Rigidbody2D>();
 		hasStarted = false;
 
 		myRigidbody.bodyType = RigidbodyType2D.Static;
 		isPaused = true;
+
+		if (waitForButton) {
+			mySR.color = new Color(mySR.color.r, mySR.color.g, mySR.color.b, 0.5f);
+		}
 	}
 	
 	// Update is called once per frame
@@ -58,6 +64,7 @@ public class pausablePhysicsObjectController : MonoBehaviour, Pausable {
 
 	public void getButton() {
 		waitForButton = false;
+		mySR.color = new Color(mySR.color.r, mySR.color.g, mySR.color.b, 1);
 		if (!PauseController.isPaused) {
 			Unpause();
 		}

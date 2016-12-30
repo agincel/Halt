@@ -60,7 +60,7 @@ public class PauseController : MonoBehaviour {
 
 		pastLocation = currentLocation;
 		currentLocation = myRigidbody.transform.position;
-		if (hasStarted && pastLocation == currentLocation) { //AUTO RESTART IF STAND STILL FOR OVER X FRAMES
+		if (hasStarted && pastLocation == currentLocation && !isPaused) { //AUTO RESTART IF STAND STILL FOR OVER X FRAMES
 			currentRestartFrames++;
 			if (currentRestartFrames > framesToRestart) {
 				SceneManager.LoadScene(SceneManager.GetActiveScene().name); //restart
