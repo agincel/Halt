@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/L9 - BounceHouse.unity
+- path: Assets/Scenes/L1 - Intro.unity
   isLoaded: 1
   isActive: 1

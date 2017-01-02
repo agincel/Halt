@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class cameraController : MonoBehaviour, Pausable {
 	public bool isFollowing;
@@ -10,21 +11,57 @@ public class cameraController : MonoBehaviour, Pausable {
 
 	private Camera me;
 
-	private Color start;
-	private Color inverted;
+	private Color[] colors;
+	private Color[] inverted;
+
+
+	float colorLerpTotal = 10f;
+	float colorLerpCurrent = 5f;
+	bool aToB = false;
+
+
+	//Canvas elements
+	public Text levelDisplay;
+
 	// Use this for initialization
 	void Start () {
 		me = GetComponent<Camera>();
 		following = GameObject.FindGameObjectWithTag("Player");
-		Debug.Log(following.name);
 
-		start = me.backgroundColor;
-		inverted = new Color(1 - start.r, 1 - start.g, 1 - start.b);
+
+		//bg color
+		colors = new Color[2];
+		inverted = new Color[2];
+		colors[0] = new Color(120f / 255f, 135f / 255f, 165f / 255f, 1);
+		colors[1] = new Color(141f / 255f, 175f / 255f, 103f / 255f, 1);
+		for(var i = 0; i < 2; i++)
+			inverted[i] = new Color(1 - colors[i].r, 1 - colors[i].g, 1 - colors[i].b);
+		
 	}
 	
 	// Update is called once per physics update
 	void FixedUpdate ()
 	{
+		if (aToB) {
+			colorLerpCurrent += Time.deltaTime;
+			if (colorLerpCurrent >= colorLerpTotal) {
+				colorLerpCurrent = colorLerpTotal;
+				aToB = false;
+			}
+		} else {
+			colorLerpCurrent -= Time.deltaTime;
+			if (colorLerpCurrent <= 0) {
+				colorLerpCurrent = 0;
+				aToB = true;
+			}
+		}
+
+		if (PauseController.isPaused && PauseController.hasStarted) {
+			me.backgroundColor = Color.Lerp(inverted[0], inverted[1], colorLerpCurrent / colorLerpTotal);
+		} else {
+			me.backgroundColor = Color.Lerp(colors[0], colors[1], colorLerpCurrent / colorLerpTotal);
+		}
+
 		if (isFollowing) {
 			float myX = this.transform.position.x;
 			float myY = this.transform.position.y;
@@ -36,12 +73,12 @@ public class cameraController : MonoBehaviour, Pausable {
 	}
 
 	public void Pause() {
-		if (PauseController.hasStarted)
-			me.backgroundColor = inverted;
+		/*if (PauseController.hasStarted)
+			me.backgroundColor = inverted;*/
 	}
 
 	public void Unpause() {
-		me.backgroundColor = start;
+		//me.backgroundColor = start;
 	}
 
 	public void getButton() {

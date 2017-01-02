@@ -21,6 +21,10 @@ public class PauseController : MonoBehaviour {
 	private Vector2 currentLocation;
 	private int framesToRestart = 100;
 	private int currentRestartFrames = 0;
+
+	public HudController HUD;
+
+	public bool isInGoal = false;
 	// Use this for initialization
 	void Start () {
 		myRigidbody = GetComponent<Rigidbody2D>();
@@ -29,28 +33,28 @@ public class PauseController : MonoBehaviour {
 		hasStarted = false;
 		levelStartPause = false;
 		currentLocation = myRigidbody.transform.position;
+		HUD = FindObjectOfType<Canvas>().GetComponent<HudController>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
 		if (Input.GetButtonDown ("Pause")) {
-
-			if (!hasStarted) {	
-				myRigidbody.simulated = true;
-				hasStarted = true;
-				SendPause(false);
-			} else {
-				SendPause(!isPaused);
-			}
+			ClickPause();
 		}
 
 		if (Input.GetButtonDown("Restart")) {
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name); //restart
+			Restart();
+		}
+		if (Input.GetButtonDown("Next")) {
+			NextLevel();
+		}
+		if (Input.GetButtonDown("Previous")) {
+			PreviousLevel();
 		}
 
 
-		if (!hasStarted && !isPaused && !levelStartPause) {
+		if (!hasStarted && !isPaused && !levelStartPause) { //pause on level start, but set isPaused to false so the world isn't in negative
 			SendPause(true);
 			isPaused = false;
 			levelStartPause = true;
@@ -70,7 +74,42 @@ public class PauseController : MonoBehaviour {
 		}
 	}
 
-	public static void SendPause(bool toPause)
+	public static void test() {
+		Debug.Log("Test");
+	}
+
+	public static void NextLevel() {
+		SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
+	}
+
+	public static void PreviousLevel() {
+		int prevScene = SceneManager.GetActiveScene().buildIndex - 1;
+		if (prevScene < 0)
+			prevScene = SceneManager.sceneCountInBuildSettings - 1;
+		SceneManager.LoadScene(prevScene);
+	}
+
+	public static void Restart() {
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name); //restart
+	}
+
+	public void ClickPause() {
+
+		if (isInGoal) {
+			HUD.fadeOut();
+			return;
+		}
+
+		if (!hasStarted) {	
+			myRigidbody.simulated = true;
+			hasStarted = true;
+			SendPause(false);
+		} else {
+			SendPause(!isPaused);
+		}
+	}
+
+	public void SendPause(bool toPause)
 	{
 		GameObject[] objectsToPause = GameObject.FindGameObjectsWithTag ("Pause");
 
@@ -88,6 +127,9 @@ public class PauseController : MonoBehaviour {
 		foreach(Pausable p in GameObject.FindGameObjectWithTag("Player").GetComponents<Pausable>()) { //special case for player
 			pausables.Add(p);
 		}
+
+		if (HUD != null)
+			pausables.Add((Pausable)HUD);
 
 		foreach (Pausable p in pausables) {
 			if (!toPause)

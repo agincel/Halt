@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Pause
+  - LevelDisplay
+  - HUD
+  - BlackBar
+  - UIButton
+  - LevelDisplayChild
   layers:
   - Default
   - TransparentFX
