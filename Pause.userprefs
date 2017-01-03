@@ -1,31 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PauseController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UIButtonScript.cs">
     <Files>
-      <File FileName="Assets\Scripts\HudController.cs" Line="171" Column="8" />
-      <File FileName="Assets\Scripts\PauseController.cs" Line="100" Column="11" />
-      <File FileName="Assets\Scripts\GoalController.cs" Line="14" Column="42" />
+      <File FileName="Assets\Scripts\PauseController.cs" Line="93" Column="72" />
+      <File FileName="Assets\Scripts\GoalController.cs" Line="44" Column="38" />
+      <File FileName="Assets\Scripts\UIButtonScript.cs" Line="27" Column="2" />
+      <File FileName="Assets\Scripts\LevelSelectController.cs" Line="32" Column="14" />
+      <File FileName="Assets\LevelSelectIconController.cs" Line="34" Column="69" />
+      <File FileName="Assets\Scripts\HudController.cs" Line="75" Column="41" />
+      <File FileName="Assets\BasicTransition.cs" Line="24" Column="65" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="Pause" expanded="True">
-            <Node name="Assembly-CSharp" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="PauseController.cs" selected="True" />
-              </Node>
-            </Node>
-            <Node name="Assembly-CSharp-Editor" expanded="True" />
-            <Node name="Assembly-CSharp-firstpass" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State name="__root__">
-          <Node name="Pause" expanded="True" selected="True" />
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

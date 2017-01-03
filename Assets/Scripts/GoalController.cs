@@ -33,6 +33,14 @@ public class GoalController : MonoBehaviour {
 			i.color = new Color(255, 255, 255, 0); //set them to invisible
 		}
 		c.gameObject.GetComponent<PauseController>().isInGoal = true;
-		
+
+
+		//save that you won
+		//SceneManager.GetActiveScene().buildIndex
+		LevelSelectController lsc = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<LevelSelectController>();
+		LevelData thisLevel = lsc.levels.Find(x => x.index == SceneManager.GetActiveScene().buildIndex - 2);
+		thisLevel.completed = true;
+		//TODO DIAMONDS
+		lsc.updateLevelInLevels(thisLevel);
 	}
 }

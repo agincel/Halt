@@ -81,7 +81,7 @@ public class HudController : MonoBehaviour, Pausable {
 		endX = 750f;
 
 		//set level text
-		levelDisplay.GetComponentInParent<Text>().text = "Level " + (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1).ToString();
+		levelDisplay.GetComponentInParent<Text>().text = "Level " + (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex - 1).ToString();
 		levelDisplayChild.GetComponentInParent<Text>().text = levelDisplay.GetComponentInParent<Text>().text;
 
 	}

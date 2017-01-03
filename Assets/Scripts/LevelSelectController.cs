@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-struct LevelData {
+[Serializable]
+public struct LevelData {
+	public int index;
 	public string name;
 	public bool completed;
 	public int collectedDiamonds;
@@ -12,17 +15,42 @@ struct LevelData {
 
 public class LevelSelectController : MonoBehaviour {
 
-	List<LevelData> levels;
+	public List<LevelData> levels;
+	string outputPath;
+	int indexTracker = 0;
 
 	// Use this for initialization
 	void Start () {
-		levels = defineLevels (); //Define the new list of levels
 
+		if (GameObject.FindGameObjectsWithTag("LevelInfo").Length > 1) { //if there are more than 1, destroy this one
+			GameObject.Destroy(this);
+		}
 
+		outputPath = Application.persistentDataPath + @"/PauseSave.data";
+		if (System.IO.File.Exists(outputPath)) {
+			using (var file = System.IO.File.OpenRead(outputPath)) {
+				var reader = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+				levels = (List<LevelData>) reader.Deserialize(file);
+			}
+		} else {
+			levels = defineLevels (); //Define the new list of levels
+		}
 
+		DontDestroyOnLoad(this); //object is persistent
+	}
 
+	public void updateLevelInLevels(LevelData l) {
+		LevelData toUpdate = levels.Find(x => x.index == l.index);
+		levels.Remove(toUpdate);
+		levels.Add(l);
+		saveLevels();
+	}
 
-
+	public void saveLevels() {
+		using (var file = System.IO.File.OpenWrite(outputPath)) {
+			var writer = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+			writer.Serialize(file, levels);
+		}
 	}
 	
 	List<LevelData> defineLevels() {
@@ -45,6 +73,7 @@ public class LevelSelectController : MonoBehaviour {
 
 	LevelData levelData(string n, int tD) {
 		LevelData ret = new LevelData();
+		ret.index = indexTracker++;
 		ret.name = n;
 		ret.completed = false;
 		ret.collectedDiamonds = 0;
