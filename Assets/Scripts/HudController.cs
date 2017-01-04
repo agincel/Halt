@@ -9,7 +9,8 @@ enum hudState {
 
 public class HudController : MonoBehaviour, Pausable {
 
-	public RectTransform levelDisplay, levelDisplayChild, blackBarTop, blackBarBottom;
+	public RectTransform levelDisplay, levelDisplayChild, subtitle, subtitleShadow, blackBarTop, blackBarBottom;
+	public string subtitleText;
 
 	public List<Image> UIButtons;
 
@@ -78,11 +79,15 @@ public class HudController : MonoBehaviour, Pausable {
 
 		state = hudState.lerpIn;
 		startX = -750f;
-		endX = 750f;
+		endX = 900f;
 
 		//set level text
 		levelDisplay.GetComponentInParent<Text>().text = "Level " + (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex - 1).ToString();
 		levelDisplayChild.GetComponentInParent<Text>().text = levelDisplay.GetComponentInParent<Text>().text;
+
+		//set subtitle text
+		subtitle.GetComponent<Text>().text = subtitleText;
+		subtitleShadow.GetComponent<Text>().text = subtitleText;
 
 	}
 	

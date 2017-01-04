@@ -48,12 +48,15 @@ public class BasicTransition : MonoBehaviour {
 		}
 	}
 
-	public void changeState(transitionState t) {
-		tState = t;
-		if (tState == transitionState.closeIn)
-			closeInCurrent = 0;
-		else if (tState == transitionState.closeOut)
-			closeOutCurrent = 0;
+	public void changeState (transitionState t)
+	{
+		if (tState != t) {
+			tState = t;
+			if (tState == transitionState.closeIn)
+				closeInCurrent = 0;
+			else if (tState == transitionState.closeOut)
+				closeOutCurrent = 0;
+		}
 	}
 
 }

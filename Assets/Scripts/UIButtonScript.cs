@@ -19,7 +19,7 @@ public class UIButtonScript : MonoBehaviour, IPointerClickHandler {
 
 	public void OnPointerClick (PointerEventData eventData)
 	{
-		if (GetComponent<Image> ().color.a >= 0.3f) {
+		if (GetComponent<Image> ().color.a >= 0.3f || type == UIButtonType.TitleBegin) {
 			if (type == UIButtonType.Restart) {
 				PauseController.Restart ();
 			} else if (type == UIButtonType.Next) {

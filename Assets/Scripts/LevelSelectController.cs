@@ -6,7 +6,6 @@ using System;
 [Serializable]
 public struct LevelData {
 	public int index;
-	public string name;
 	public bool completed;
 	public int collectedDiamonds;
 	public int totalDiamonds;
@@ -56,28 +55,19 @@ public class LevelSelectController : MonoBehaviour {
 	List<LevelData> defineLevels() {
 		List<LevelData> ret = new List<LevelData>();
 
-		ret.Add(levelData("Introduction", 1));
-		ret.Add(levelData("2xTrouble", 0));
-		ret.Add(levelData("Circles", 2));
-		ret.Add(levelData("Ellipses", 1));
-		ret.Add(levelData("Multitrack", 1));
-		ret.Add(levelData("You Keep Moving", 1));
-		ret.Add(levelData("Launchpad", 0));
-		ret.Add(levelData("Two Birds", 0));
-		ret.Add(levelData("Oscillations", 0));
-		ret.Add(levelData("Springboard", 1));
-		ret.Add(levelData("Bounce House", 0));
+		for(int i = 0; i < 11; i++) {
+			ret.Add(levelData(i));
+		}
 
 		return ret;
 	}
 
-	LevelData levelData(string n, int tD) {
+	LevelData levelData(int ind) {
 		LevelData ret = new LevelData();
-		ret.index = indexTracker++;
-		ret.name = n;
+		ret.index = ind;
 		ret.completed = false;
 		ret.collectedDiamonds = 0;
-		ret.totalDiamonds = tD;
+		ret.totalDiamonds = -1; //this will be overwritten in level
 
 		return ret;
 	}

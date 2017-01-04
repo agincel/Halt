@@ -2,13 +2,12 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UIButtonScript.cs">
     <Files>
-      <File FileName="Assets\Scripts\PauseController.cs" Line="93" Column="72" />
-      <File FileName="Assets\Scripts\GoalController.cs" Line="44" Column="38" />
-      <File FileName="Assets\Scripts\UIButtonScript.cs" Line="27" Column="2" />
-      <File FileName="Assets\Scripts\LevelSelectController.cs" Line="32" Column="14" />
-      <File FileName="Assets\LevelSelectIconController.cs" Line="34" Column="69" />
-      <File FileName="Assets\Scripts\HudController.cs" Line="75" Column="41" />
-      <File FileName="Assets\BasicTransition.cs" Line="24" Column="65" />
+      <File FileName="Assets\Scripts\PauseController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GoalController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UIButtonScript.cs" Line="22" Column="80" />
+      <File FileName="Assets\Scripts\LevelSelectController.cs" Line="59" Column="23" />
+      <File FileName="Assets\Scripts\HudController.cs" Line="82" Column="13" />
+      <File FileName="Assets\Scripts\BasicTransition.cs" Line="59" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
