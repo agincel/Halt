@@ -16,9 +16,7 @@ public class GoalController : MonoBehaviour {
 		if (won) {
 			pauseCurrent += Time.deltaTime;
 			if (pauseCurrent > pauseTotal) {
-				
 				c.gameObject.GetComponent<PauseController>().HUD.fadeOut();
-
 			}
 		}
 	}
@@ -39,8 +37,12 @@ public class GoalController : MonoBehaviour {
 		//SceneManager.GetActiveScene().buildIndex
 		LevelSelectController lsc = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<LevelSelectController>();
 		LevelData thisLevel = lsc.levels.Find(x => x.index == SceneManager.GetActiveScene().buildIndex - 2);
+
+		PauseController.calculateDiamonds(); //handle adding to Diamond totals
 		thisLevel.completed = true;
-		//TODO DIAMONDS
+
+
+
 		lsc.updateLevelInLevels(thisLevel);
 	}
 }

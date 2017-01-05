@@ -11,6 +11,8 @@ public class LevelSelectIconController : MonoBehaviour, IPointerClickHandler {
 	LevelData myLevel;
 	LevelData previousLevel;
 
+	public Text levelText, diamondText;
+
 	LevelData empty;
 
 	bool hasInit = false;
@@ -46,10 +48,11 @@ public class LevelSelectIconController : MonoBehaviour, IPointerClickHandler {
 	public void switchPage (int deltaPages) //usually +- 15
 	{
 		ID += deltaPages;
+		LevelSelectController lsc = GameObject.FindGameObjectWithTag ("LevelInfo").GetComponent<LevelSelectController> ();
 
-		myLevel = GameObject.FindGameObjectWithTag ("LevelInfo").GetComponent<LevelSelectController> ().levels.Find (x => x.index == ID);
+		myLevel = lsc.levels.Find (x => x.index == ID);
 		if (ID != 0) //first level edge case
-			previousLevel = GameObject.FindGameObjectWithTag ("LevelInfo").GetComponent<LevelSelectController> ().levels.Find (x => x.index == ID - 1);
+			previousLevel = lsc.levels.Find (x => x.index == ID - 1);
 		else {
 			previousLevel = empty; //effectively null, a dummy level so level 1 is always unlocked
 		}
@@ -59,14 +62,48 @@ public class LevelSelectIconController : MonoBehaviour, IPointerClickHandler {
 		}
 
 
-		if (ID < GameObject.FindGameObjectWithTag ("LevelInfo").GetComponent<LevelSelectController> ().levels.Count) {
-			this.GetComponentInChildren<Text> ().text = (ID + 1).ToString ();
+
+
+
+		if (ID < lsc.levels.Count) { //is valid level
+			levelText.text = (ID + 1).ToString ();
 			GetComponent<Image> ().color = new Color (255, 255, 255, 1);
+
+			bool hasCollectedDiamond = lsc.hasCollectedDiamond();
+
+			//diamond text
+			if (myLevel.completed && myLevel.diamonds.Length > 0 && hasCollectedDiamond) { 
+				diamondText.color = new Color(0, 0, 0, 1);
+				int collectedDiamonds = 0;
+				foreach (bool b in myLevel.diamonds)
+				{
+					if (b == true)
+						collectedDiamonds++;
+				}
+
+				diamondText.text = collectedDiamonds.ToString() + "/" + myLevel.diamonds.Length.ToString();
+
+				if (collectedDiamonds == myLevel.diamonds.Length){
+					Debug.Log("Have all diamonds!");
+					GetComponent<Image>().color = new Color(185f / 255f, 1f, 152f / 255f, 1f);
+				} else {
+					GetComponent<Image>().color = new Color(255, 255, 255, 1);
+				}
+			}
+			else {
+				diamondText.color = new Color(0, 0, 0, 0);
+			}
+
+			if (hasCollectedDiamond && myLevel.diamonds.Length == 0 && myLevel.completed) {
+				GetComponent<Image>().color = new Color(185f / 255f, 1f, 152f / 255f, 1); //if level with no diamonds is completed, it'll fit in with the others and indicate there's nothing else
+			}
+
 		}
 		else{
-			this.GetComponentInChildren<Text>().text = "";
+			levelText.text = "";
 			GetComponent<Button>().interactable = false;
 			GetComponent<Image>().color = new Color(255, 255, 255, 0);
 		}
 	}
+
 }

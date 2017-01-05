@@ -11,6 +11,7 @@ TagManager:
   - UIButton
   - LevelDisplayChild
   - LevelInfo
+  - Diamond
   layers:
   - Default
   - TransparentFX

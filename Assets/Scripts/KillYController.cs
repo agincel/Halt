@@ -15,10 +15,16 @@ public class KillYController : MonoBehaviour {
 		
 	}
 
-	void OnTriggerEnter2D(Collider2D c)
+	void OnTriggerEnter2D (Collider2D c)
 	{
-		if (c.gameObject.tag == "Player")
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		if (c.gameObject.tag == "Player") {
+			try {
+				PauseController.calculateDiamonds ();
+			} catch {
+				;
+			}
+			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+		}
 		else 
 			Destroy(c.gameObject);
 	}

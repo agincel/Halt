@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public enum UIButtonType {
-	Restart, Next, Previous, Home, TitleBegin, BackToTitle
+	Restart, Next, Previous, Home, TitleBegin, BackToTitle, DeleteSaves
 }
 
 public class UIButtonScript : MonoBehaviour, IPointerClickHandler {
@@ -34,6 +34,10 @@ public class UIButtonScript : MonoBehaviour, IPointerClickHandler {
 			} else if (type == UIButtonType.BackToTitle) {
 				this.GetComponentInParent<BasicTransition>().changeState(transitionState.closeIn);
 				StartCoroutine(PreviousScreen());
+			} else if (type == UIButtonType.DeleteSaves) {
+				GameObject.FindGameObjectWithTag ("LevelInfo").GetComponent<LevelSelectController> ().resetSaveData();
+				this.GetComponentInParent<BasicTransition>().changeState(transitionState.closeIn);
+				StartCoroutine(NextScreen());
 			}
 		}
 	}
