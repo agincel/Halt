@@ -38,11 +38,8 @@ public class GoalController : MonoBehaviour {
 		LevelSelectController lsc = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<LevelSelectController>();
 		LevelData thisLevel = lsc.levels.Find(x => x.index == SceneManager.GetActiveScene().buildIndex - 2);
 
-		PauseController.calculateDiamonds(); //handle adding to Diamond totals
 		thisLevel.completed = true;
-
-
-
 		lsc.updateLevelInLevels(thisLevel);
+		PauseController.calculateDiamonds(); //handle adding to Diamond totals
 	}
 }

@@ -1,13 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UIButtonScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GoalController.cs">
     <Files>
-      <File FileName="Assets\Scripts\PauseController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GoalController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UIButtonScript.cs" Line="22" Column="80" />
-      <File FileName="Assets\Scripts\LevelSelectController.cs" Line="59" Column="23" />
+      <File FileName="Assets\Scripts\PauseController.cs" Line="93" Column="23" />
+      <File FileName="Assets\Scripts\GoalController.cs" Line="39" Column="103" />
+      <File FileName="Assets\Scripts\UIButtonScript.cs" Line="39" Column="87" />
+      <File FileName="Assets\Scripts\LevelSelectController.cs" Line="77" Column="31" />
       <File FileName="Assets\Scripts\HudController.cs" Line="82" Column="13" />
       <File FileName="Assets\Scripts\BasicTransition.cs" Line="59" Column="4" />
+      <File FileName="Assets\Scripts\hiddenCollectibleController.cs" Line="20" Column="112" />
+      <File FileName="Assets\Scripts\LevelSelectIconController.cs" Line="98" Column="73" />
+      <File FileName="Assets\Scripts\KillYController.cs" Line="24" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
