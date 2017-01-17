@@ -58,7 +58,7 @@ public class LevelSelectController : MonoBehaviour {
 	List<LevelData> defineLevels() {
 		List<LevelData> ret = new List<LevelData>();
 
-		for(int i = 0; i < 11; i++) {
+		for(int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings - 2; i++) {
 			ret.Add(levelData(i));
 		}
 

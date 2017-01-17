@@ -18,11 +18,6 @@ public class KillYController : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D c)
 	{
 		if (c.gameObject.tag == "Player") {
-			try {
-				PauseController.calculateDiamonds ();
-			} catch {
-				;
-			}
 			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 		}
 		else 

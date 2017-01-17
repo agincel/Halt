@@ -90,7 +90,6 @@ public class PauseController : MonoBehaviour {
 	}
 
 	public static void Restart() {
-		calculateDiamonds();
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name); //restart
 	}
 
@@ -142,23 +141,28 @@ public class PauseController : MonoBehaviour {
 	}
 
 	public static void calculateDiamonds() {
-		LevelSelectController lsc = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<LevelSelectController>();
-		LevelData thisLevel = lsc.levels.Find(x => x.index == SceneManager.GetActiveScene().buildIndex - 2);
+		try {
+			LevelSelectController lsc = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<LevelSelectController>();
+			LevelData thisLevel = lsc.levels.Find(x => x.index == SceneManager.GetActiveScene().buildIndex - 2);
 
-		//TODO DIAMONDS
-		GameObject[] diamonds = GameObject.FindGameObjectsWithTag("Diamond");
+			//TODO DIAMONDS
+			GameObject[] diamonds = GameObject.FindGameObjectsWithTag("Diamond");
 
-		if (thisLevel.diamonds.Length != diamonds.Length) {
-			thisLevel.diamonds = new bool[diamonds.Length]; //set the boolean array
+			if (thisLevel.diamonds.Length != diamonds.Length) {
+				thisLevel.diamonds = new bool[diamonds.Length]; //set the boolean array
+			}
+
+
+			foreach (GameObject g in diamonds) {
+				hiddenCollectibleController d = g.GetComponent<hiddenCollectibleController>();
+				if (d.collected)
+					thisLevel.diamonds[d.ID] = true; //set to true if not already collected
+			}
+
+			lsc.updateLevelInLevels(thisLevel);
 		}
-
-
-		foreach (GameObject g in diamonds) {
-			hiddenCollectibleController d = g.GetComponent<hiddenCollectibleController>();
-			if (d.collected)
-				thisLevel.diamonds[d.ID] = true; //set to true if not already collected
+		catch {
+			Debug.Log("LevelSelectController does not exist.");
 		}
-
-		lsc.updateLevelInLevels(thisLevel);
 	}
 }

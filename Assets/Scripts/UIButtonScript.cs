@@ -14,7 +14,14 @@ public class UIButtonScript : MonoBehaviour, IPointerClickHandler {
 	public UIButtonType type;
 
 	void Update() {
-
+		if (Input.GetButtonDown("Pause")) {
+			if (type == UIButtonType.TitleBegin) {
+				this.GetComponentInParent<BasicTransition>().changeState(transitionState.closeIn);
+				StartCoroutine(NextScreen());
+			} else if (type == UIButtonType.BackToTitle) { //hacky, using back to title to start level 1 on space press
+				SceneManager.LoadScene(2); //level 1
+			}
+		}
 	}
 
 	public void OnPointerClick (PointerEventData eventData)

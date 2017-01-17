@@ -40,6 +40,6 @@ public class GoalController : MonoBehaviour {
 
 		thisLevel.completed = true;
 		lsc.updateLevelInLevels(thisLevel);
-		PauseController.calculateDiamonds(); //handle adding to Diamond totals
+		PauseController.calculateDiamonds();
 	}
 }
