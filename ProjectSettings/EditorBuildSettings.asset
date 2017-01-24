@@ -39,3 +39,9 @@ EditorBuildSettings:
     path: Assets/Scenes/L13_5 - BringTogether0.unity
   - enabled: 1
     path: Assets/Scenes/L14 - BringTogether1.unity
+  - enabled: 1
+    path: Assets/Scenes/L16 - RedBad.unity
+  - enabled: 1
+    path: Assets/Scenes/L17 - Red2.unity
+  - enabled: 1
+    path: Assets/Scenes/L18 - Corridor.unity

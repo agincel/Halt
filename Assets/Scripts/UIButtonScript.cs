@@ -46,6 +46,8 @@ public class UIButtonScript : MonoBehaviour, IPointerClickHandler {
 				this.GetComponentInParent<BasicTransition>().changeState(transitionState.closeIn);
 				StartCoroutine(NextScreen());
 			}
+
+			GameObject.FindGameObjectWithTag("MusicPlayer").GetComponent<MusicPlayerController>().blip.Play();
 		}
 	}
 

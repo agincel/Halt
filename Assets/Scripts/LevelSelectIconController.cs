@@ -36,6 +36,7 @@ public class LevelSelectIconController : MonoBehaviour, IPointerClickHandler {
 		if (previousLevel.completed && GetComponent<Button>().interactable) {
 			this.GetComponentInParent<BasicTransition>().changeState(transitionState.closeIn);
 			StartCoroutine(GoToLevel());
+			GameObject.FindGameObjectWithTag("MusicPlayer").GetComponent<MusicPlayerController>().blip.Play();
 		}
 	}
 
@@ -59,6 +60,8 @@ public class LevelSelectIconController : MonoBehaviour, IPointerClickHandler {
 
 		if (!previousLevel.completed) {
 			GetComponent<Button> ().interactable = false;
+		} else {
+			GetComponent<Button> ().interactable = true;
 		}
 
 
@@ -69,10 +72,11 @@ public class LevelSelectIconController : MonoBehaviour, IPointerClickHandler {
 			levelText.text = (ID + 1).ToString ();
 			GetComponent<Image> ().color = new Color (255, 255, 255, 1);
 
+
 			bool hasCollectedDiamond = lsc.hasCollectedDiamond();
 
 			//diamond text
-			if (myLevel.completed && myLevel.diamonds.Length > 0 && hasCollectedDiamond) { 
+			if (myLevel.completed && hasCollectedDiamond) { 
 				diamondText.color = new Color(0, 0, 0, 1);
 				int collectedDiamonds = 0;
 				foreach (bool b in myLevel.diamonds)
@@ -84,7 +88,6 @@ public class LevelSelectIconController : MonoBehaviour, IPointerClickHandler {
 				diamondText.text = collectedDiamonds.ToString() + "/" + myLevel.diamonds.Length.ToString();
 
 				if (collectedDiamonds == myLevel.diamonds.Length){
-					Debug.Log("Have all diamonds!");
 					GetComponent<Image>().color = new Color(185f / 255f, 1f, 152f / 255f, 1f);
 				} else {
 					GetComponent<Image>().color = new Color(255, 255, 255, 1);
@@ -99,10 +102,11 @@ public class LevelSelectIconController : MonoBehaviour, IPointerClickHandler {
 			}
 
 		}
-		else{
+		else{ //is invalid level
 			levelText.text = "";
 			GetComponent<Button>().interactable = false;
 			GetComponent<Image>().color = new Color(255, 255, 255, 0);
+			diamondText.color = new Color(0, 0, 0, 0);
 		}
 	}
 

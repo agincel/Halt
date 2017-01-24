@@ -64,7 +64,7 @@ public class PauseController : MonoBehaviour {
 
 		pastLocation = currentLocation;
 		currentLocation = myRigidbody.transform.position;
-		if (hasStarted && pastLocation == currentLocation && !isPaused && !isInGoal) { //AUTO RESTART IF STAND STILL FOR OVER X FRAMES
+		if (hasStarted && pastLocation == currentLocation && !isPaused && !isInGoal && this.GetComponent<SpriteRenderer>().color.a > 0) { //AUTO RESTART IF STAND STILL FOR OVER X FRAMES
 			currentRestartFrames++;
 			if (currentRestartFrames > framesToRestart) {
 				SceneManager.LoadScene(SceneManager.GetActiveScene().name); //restart
@@ -126,6 +126,12 @@ public class PauseController : MonoBehaviour {
 
 		foreach(Pausable p in GameObject.FindGameObjectWithTag("Player").GetComponents<Pausable>()) { //special case for player
 			pausables.Add(p);
+		}
+
+		try {
+			pausables.Add(GameObject.FindGameObjectWithTag("MusicPlayer").GetComponent<Pausable>()); //music player
+		} catch {
+			;
 		}
 
 		if (HUD != null)

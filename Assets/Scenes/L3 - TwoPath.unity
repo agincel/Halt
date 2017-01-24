@@ -529,6 +529,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 20644781439118200, guid: f9059c199e5ffa14abfc753c2382e46e,
+        type: 2}
+      propertyPath: orthographic size
+      value: 10.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9059c199e5ffa14abfc753c2382e46e, type: 2}
   m_IsPrefabParent: 0
@@ -682,6 +687,11 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114951607093813904, guid: 7227232e12d254f4b8daa0986e0b3b96,
+        type: 2}
+      propertyPath: subtitleText
+      value: Not all paths lead to a destination
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7227232e12d254f4b8daa0986e0b3b96, type: 2}

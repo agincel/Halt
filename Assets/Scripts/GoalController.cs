@@ -12,6 +12,10 @@ public class GoalController : MonoBehaviour {
 
 	Collider2D c;
 
+	void Start() {
+		GameObject.FindGameObjectWithTag("MusicPlayer").GetComponent<MusicPlayerController>().Unpause();
+	}
+
 	void Update() {
 		if (won) {
 			pauseCurrent += Time.deltaTime;

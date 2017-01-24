@@ -23,6 +23,11 @@ public class cameraController : MonoBehaviour, Pausable {
 	//Canvas elements
 	public Text levelDisplay;
 
+	public float shakeDuration = 0f;
+	public float shakeIntensity = 0.1f;
+
+	float rootX, rootY;
+
 	// Use this for initialization
 	void Start () {
 		me = GetComponent<Camera>();
@@ -36,7 +41,24 @@ public class cameraController : MonoBehaviour, Pausable {
 		colors[1] = new Color(141f / 255f, 175f / 255f, 103f / 255f, 1);
 		for(var i = 0; i < 2; i++)
 			inverted[i] = new Color(1 - colors[i].r, 1 - colors[i].g, 1 - colors[i].b);
+
+		rootX = this.transform.position.x;
+		rootY = this.transform.position.y;
 		
+	}
+
+	void Update() {
+		//shake
+		if (shakeDuration > 0) {
+			shakeDuration -= Time.deltaTime;
+			this.transform.position = new Vector3(rootX + ((Random.value * 2) - 1) * shakeIntensity, rootY + ((Random.value * 2) - 1) * shakeIntensity, -100);
+		}
+	}
+
+	public void shake(float duration, float intensity) {
+		shakeDuration = duration;
+		shakeIntensity = intensity;
+		Debug.Log("Shakey shake");
 	}
 	
 	// Update is called once per physics update

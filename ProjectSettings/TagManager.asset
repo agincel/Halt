@@ -12,6 +12,9 @@ TagManager:
   - LevelDisplayChild
   - LevelInfo
   - Diamond
+  - LevelSelectButton
+  - NextPrev
+  - MusicPlayer
   layers:
   - Default
   - TransparentFX
