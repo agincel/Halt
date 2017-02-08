@@ -44,4 +44,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/L17 - Red2.unity
   - enabled: 1
+    path: Assets/Scenes/L19 - MovingRed.unity
+  - enabled: 1
     path: Assets/Scenes/L18 - Corridor.unity
+  - enabled: 1
+    path: Assets/Scenes/L20 - Like a Scythe.unity
+  - enabled: 1
+    path: Assets/Scenes/L21 - TractorBeams1.unity
+  - enabled: 1
+    path: Assets/Scenes/L22 - TractorBeams2.unity
+  - enabled: 1
+    path: Assets/Scenes/L23 - TractorBeam3.unity

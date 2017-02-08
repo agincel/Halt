@@ -6,6 +6,8 @@ public class buttonController : MonoBehaviour {
 
 	public GameObject[] affects;
 	private bool isPressed;
+
+	public bool onlyPlayerCanPress = false;
 	// Use this for initialization
 	void Start () {
 		isPressed = false;
@@ -18,7 +20,7 @@ public class buttonController : MonoBehaviour {
 
 	public void OnTriggerEnter2D (Collider2D c)
 	{
-		if (!isPressed) {
+		if (!isPressed && (!onlyPlayerCanPress || c.tag == "Player")) {
 			foreach (GameObject g in affects) {
 				Pausable p = (Pausable)g.GetComponent (typeof(Pausable));
 				p.getButton ();

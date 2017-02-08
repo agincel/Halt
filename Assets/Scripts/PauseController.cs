@@ -25,6 +25,9 @@ public class PauseController : MonoBehaviour {
 	public HudController HUD;
 
 	public bool isInGoal = false;
+
+
+	public List<Vector2> tractorVelocities;
 	// Use this for initialization
 	void Start () {
 		myRigidbody = GetComponent<Rigidbody2D>();
@@ -62,6 +65,9 @@ public class PauseController : MonoBehaviour {
 
 
 
+
+
+
 		pastLocation = currentLocation;
 		currentLocation = myRigidbody.transform.position;
 		if (hasStarted && pastLocation == currentLocation && !isPaused && !isInGoal && this.GetComponent<SpriteRenderer>().color.a > 0) { //AUTO RESTART IF STAND STILL FOR OVER X FRAMES
@@ -71,6 +77,19 @@ public class PauseController : MonoBehaviour {
 			}
 		} else if (hasStarted) {
 			currentRestartFrames = 0;
+		}
+	}
+
+	void FixedUpdate () {
+		//receive laser velocities
+		if (tractorVelocities.Count > 0) {
+			Vector2 setV = new Vector2();
+			foreach(Vector2 v in tractorVelocities) {
+				setV += v * Time.fixedDeltaTime;
+			}
+
+			setV /= tractorVelocities.Count; //average direction being sent
+			myRigidbody.velocity = setV;
 		}
 	}
 

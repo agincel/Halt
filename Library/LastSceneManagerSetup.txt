@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/L19 - MovingRed.unity
+- path: Assets/Scenes/L23 - TractorBeam3.unity
   isLoaded: 1
   isActive: 1
