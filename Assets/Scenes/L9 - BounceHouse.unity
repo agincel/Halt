@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 8
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -25,6 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -41,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 11
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -53,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 4
+    serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -66,13 +67,27 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_DirectLightInLightProbes: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
+    m_MixedBakeMode: 1
+    m_BakeBackend: 0
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVRFiltering: 0
+    m_PVRFilteringMode: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousColorSigma: 1
+    m_PVRFilteringAtrousNormalSigma: 1
+    m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_RuntimeCPUUsage: 25
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -89,6 +104,8 @@ NavMeshSettings:
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1001 &36854931
@@ -335,7 +352,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4094830982837686, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 10.71
+      value: 11.42
       objectReference: {fileID: 0}
     - target: {fileID: 4094830982837686, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
       propertyPath: m_LocalPosition.z
@@ -371,7 +388,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4094830982837686, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
       propertyPath: m_LocalScale.x
-      value: 6.3920383
+      value: 7.3408523
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
@@ -439,7 +456,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4094830982837686, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 14.126462
+      value: 15.05
       objectReference: {fileID: 0}
     - target: {fileID: 4094830982837686, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
       propertyPath: m_LocalPosition.z
@@ -606,11 +623,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4094830982837686, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 11.61
+      value: 11.75
       objectReference: {fileID: 0}
     - target: {fileID: 4094830982837686, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.88
+      value: 3.93
       objectReference: {fileID: 0}
     - target: {fileID: 4094830982837686, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
       propertyPath: m_LocalPosition.z
@@ -646,7 +663,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4094830982837686, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
       propertyPath: m_LocalScale.x
-      value: 18.91122
+      value: 22.693455
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033283230074666, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.006
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033283230074666, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 392222d12db34fe4c9b0e88490e0f490, type: 2}
@@ -908,7 +933,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4916330670004130, guid: 1cf1db55ebfa37742818d0f46e4148b4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 7.1
+      value: 7.57
       objectReference: {fileID: 0}
     - target: {fileID: 4916330670004130, guid: 1cf1db55ebfa37742818d0f46e4148b4, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1025,7 +1050,7 @@ Prefab:
     - target: {fileID: 20644781439118200, guid: f9059c199e5ffa14abfc753c2382e46e,
         type: 2}
       propertyPath: orthographic size
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9059c199e5ffa14abfc753c2382e46e, type: 2}

@@ -14,6 +14,9 @@ public class cameraController : MonoBehaviour, Pausable {
 	private Color[] colors;
 	private Color[] inverted;
 
+    public Sprite[] bgs;
+
+
 
 	float colorLerpTotal = 10f;
 	float colorLerpCurrent = 5f;
@@ -32,7 +35,7 @@ public class cameraController : MonoBehaviour, Pausable {
 	void Start () {
 		me = GetComponent<Camera>();
 		following = GameObject.FindGameObjectWithTag("Player");
-
+        
 
 		//bg color
 		colors = new Color[2];
@@ -44,7 +47,10 @@ public class cameraController : MonoBehaviour, Pausable {
 
 		rootX = this.transform.position.x;
 		rootY = this.transform.position.y;
-		
+
+
+        
+        this.GetComponentInChildren<SpriteRenderer>().sprite = bgs[(int)Random.Range(0, (float)bgs.Length)];
 	}
 
 	void Update() {

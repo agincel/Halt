@@ -14,6 +14,8 @@ public class HudController : MonoBehaviour, Pausable {
 
 	public List<Image> UIButtons;
 
+	public Text speedrunText;
+
 	float blackBarHeight;
 	float startTopY;
 	float startBottomY;
@@ -106,8 +108,8 @@ public class HudController : MonoBehaviour, Pausable {
 			/*
 			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeOutBack(startTopY, startTopY - blackBarHeight, lerpInCurrent / lerpInTotal, 0.35f));
 			blackBarBottom.anchoredPosition = new Vector2(0, LeanTween.easeOutBack(startBottomY, startBottomY + blackBarHeight, lerpInCurrent / lerpInTotal, 0.35f));*/
-			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeOutSine(-150, 150, lerpInCurrent / lerpInTotal));
-			blackBarBottom.anchoredPosition = new Vector2(0, LeanTween.easeOutSine(150, -150, lerpInCurrent / lerpInTotal));
+			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeOutSine(-200, 200, lerpInCurrent / lerpInTotal));
+			blackBarBottom.anchoredPosition = new Vector2(0, LeanTween.easeOutSine(200, -200, lerpInCurrent / lerpInTotal));
 
 		}
 		else if (state == hudState.lerpOut) {
@@ -121,13 +123,15 @@ public class HudController : MonoBehaviour, Pausable {
 			levelDisplay.anchoredPosition = new Vector2(LeanTween.easeInBack(midX, endX, lerpOutCurrent / lerpOutTotal, 0.35f), 0);
 			/*blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeOutBack(startTopY - blackBarHeight, startTopY, lerpOutCurrent / lerpOutTotal, 0.35f));
 			blackBarBottom.anchoredPosition = new Vector2(0, LeanTween.easeOutBack(startBottomY + blackBarHeight, startBottomY, lerpOutCurrent / lerpOutTotal, 0.35f));*/
-			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeOutSine(midTop, 150, lerpOutCurrent / lerpOutTotal));
-			blackBarBottom.anchoredPosition = new Vector2(0,LeanTween.easeOutSine(midBottom, -150, lerpOutCurrent / lerpOutTotal));
+			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeOutSine(midTop, 200, lerpOutCurrent / lerpOutTotal));
+			blackBarBottom.anchoredPosition = new Vector2(0,LeanTween.easeOutSine(midBottom, -200, lerpOutCurrent / lerpOutTotal));
 
 
 			foreach(Image i in UIButtons) {
 				i.color = new Color(255, 255, 255, LeanTween.linear(0, 0.45f, lerpOutCurrent / lerpOutTotal));
 			}
+
+
 		}
 		else if (state == hudState.fade) {
 			endLevelCurrent += Time.deltaTime;
@@ -136,9 +140,25 @@ public class HudController : MonoBehaviour, Pausable {
 				PauseController.NextLevel(); //GO TO NEXT LEVEL
 			}
 
-			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeInSine(150, -150, Mathf.Clamp(endLevelCurrent, 0, endLevelTotal) / endLevelTotal));
-			blackBarBottom.anchoredPosition = new Vector2(0, LeanTween.easeInSine(-150, 150, Mathf.Clamp(endLevelCurrent, 0, endLevelTotal) / endLevelTotal));
+			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeInSine(200, -200, Mathf.Clamp(endLevelCurrent, 0, endLevelTotal) / endLevelTotal));
+			blackBarBottom.anchoredPosition = new Vector2(0, LeanTween.easeInSine(-200, 200, Mathf.Clamp(endLevelCurrent, 0, endLevelTotal) / endLevelTotal));
 		}
+
+
+
+		try { //SPEEDRUN TIMER
+				SpeedrunController sc = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<SpeedrunController>();
+				if (sc.isSpeedrunning) {
+					speedrunText.color = new Color(0, 0, 0, 0.75f);
+					float currentTime = (float)(System.DateTime.Now - sc.currentRun.startTime).TotalSeconds;
+					speedrunText.text = string.Format("{0}:{1:00}", (int)currentTime / 60, (int)currentTime % 60);
+				} else {
+					speedrunText.color = new Color(0, 0, 0, 0);
+				}
+		} catch {
+				speedrunText.color = new Color(0, 0, 0, 0);
+		}
+
 
 	}
 

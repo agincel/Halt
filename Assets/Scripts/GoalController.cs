@@ -13,7 +13,11 @@ public class GoalController : MonoBehaviour {
 	Collider2D c;
 
 	void Start() {
-		GameObject.FindGameObjectWithTag("MusicPlayer").GetComponent<MusicPlayerController>().Unpause();
+		try {
+			GameObject.FindGameObjectWithTag("MusicPlayer").GetComponent<MusicPlayerController>().Unpause();
+		} catch {
+			;
+		}
 	}
 
 	void Update() {
@@ -39,11 +43,18 @@ public class GoalController : MonoBehaviour {
 
 		//save that you won
 		//SceneManager.GetActiveScene().buildIndex
-		LevelSelectController lsc = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<LevelSelectController>();
+		GameObject li = GameObject.FindGameObjectWithTag("LevelInfo");
+		SpeedrunController sc = li.GetComponent<SpeedrunController>();
+
+		LevelSelectController lsc = li.GetComponent<LevelSelectController>();
 		LevelData thisLevel = lsc.levels.Find(x => x.index == SceneManager.GetActiveScene().buildIndex - 2);
 
 		thisLevel.completed = true;
 		lsc.updateLevelInLevels(thisLevel);
 		PauseController.calculateDiamonds();
+
+		if (sc.isSpeedrunning) {
+			sc.speedrunUpdateTime();
+		}
 	}
 }

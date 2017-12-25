@@ -97,6 +97,17 @@ public class LevelSelectIconController : MonoBehaviour, IPointerClickHandler {
 				diamondText.color = new Color(0, 0, 0, 0);
 			}
 
+			SpeedrunController sc = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<SpeedrunController>();
+			if (sc.showingSpeedrunInfo) { //show split per level
+				Debug.Log("Showing Speedrun Info");
+				if (sc.savedRun.levelCompletionTimes[ID] > 0) {
+					diamondText.color = new Color(0, 0, 0, 1);
+					diamondText.text = ((float)((int)(sc.savedRun.levelCompletionTimes[ID] * 1000)) / 1000).ToString(); //round to 3 decimal places
+				} else {
+					diamondText.color = new Color(0, 0, 0, 0);
+				}
+			}
+
 			if (hasCollectedDiamond && myLevel.diamonds.Length == 0 && myLevel.completed) {
 				GetComponent<Image>().color = new Color(185f / 255f, 1f, 152f / 255f, 1); //if level with no diamonds is completed, it'll fit in with the others and indicate there's nothing else
 			}

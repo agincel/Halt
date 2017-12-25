@@ -17,12 +17,33 @@ public class LevelSelectController : MonoBehaviour {
 	string outputPath;
 	int indexTracker = 0;
 
+	int timesVisited = 1;
+
 	// Use this for initialization
 	void Start () {
 
 		if (GameObject.FindGameObjectsWithTag("LevelInfo").Length > 1) { //if there are more than 1, destroy this one
+
+			GameObject[] g = GameObject.FindGameObjectsWithTag("LevelInfo");
+			foreach (GameObject o in g) {
+				try {
+					o.GetComponent<LevelSelectController>().timesVisited += 1;
+					if (o.GetComponent<LevelSelectController>().timesVisited == 3) {
+						var outputPath = Application.persistentDataPath + @"/speedrunUnlocked.data";
+						if (!System.IO.File.Exists(outputPath)) {
+							System.IO.File.Create(outputPath);
+						}
+						GetComponent<SpeedrunController>().showingSpeedrunInfo = true;
+					}
+				} catch {
+					;
+				}
+			}
+			
 			GameObject.Destroy(this);
 		}
+
+		Screen.fullScreen = true; //REMOVE THIS FOR NON JAM BUILD
 
 		outputPath = Application.persistentDataPath + @"/PauseSave.data";
 		if (System.IO.File.Exists(outputPath)) {
@@ -30,7 +51,22 @@ public class LevelSelectController : MonoBehaviour {
 				var reader = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 				try {
 					levels = (List<LevelData>) reader.Deserialize(file);
+
+					Debug.Log("Read in old data");
+					if (levels.Count < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings - 2) {
+						Debug.Log("We don't have enough levels");
+
+						GetComponent<SpeedrunController>().clearSpeedrun(); //run is inaccurate
+
+
+						for (var i = 0; i < (UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings - 2) - levels.Count; i++) {
+							Debug.Log("Adding level " + (i + levels.Count.ToString()));
+							levels.Add(levelData(levels.Count + i)); //add in missing levels
+							Debug.Log("Added successfully.");
+						}
+					}
 				} catch {
+					Debug.Log("Catch block in trying to deserialize file");
 					levels = defineLevels(); //if I went and changed the save format
 				}
 			}
@@ -49,10 +85,17 @@ public class LevelSelectController : MonoBehaviour {
 	}
 
 	public void saveLevels() {
+		Debug.Log("Time to save");
+
 		using (var file = System.IO.File.OpenWrite(outputPath)) {
+			Debug.Log("Using file");
 			var writer = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+			Debug.Log("Defined writer");
 			writer.Serialize(file, levels);
+			Debug.Log("Serialized levels to file");
 		}
+
+		Debug.Log("Wrote successfully");
 	}
 	
 	List<LevelData> defineLevels() {

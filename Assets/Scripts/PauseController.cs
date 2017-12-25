@@ -14,6 +14,7 @@ public class PauseController : MonoBehaviour {
 
 	public static bool isPaused;
 	public static bool hasStarted;
+    public bool shouldAutokill = true;
 	private Rigidbody2D myRigidbody;
 	private bool levelStartPause;
 
@@ -26,6 +27,8 @@ public class PauseController : MonoBehaviour {
 
 	public bool isInGoal = false;
 
+	public SpeedrunController sc;
+
 
 	public List<Vector2> tractorVelocities;
 	// Use this for initialization
@@ -37,6 +40,11 @@ public class PauseController : MonoBehaviour {
 		levelStartPause = false;
 		currentLocation = myRigidbody.transform.position;
 		HUD = FindObjectOfType<Canvas>().GetComponent<HudController>();
+		try {
+			sc = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<SpeedrunController>();
+		} catch {
+			sc = null;
+		}
 	}
 	
 	// Update is called once per frame
@@ -49,10 +57,10 @@ public class PauseController : MonoBehaviour {
 		if (Input.GetButtonDown("Restart")) {
 			Restart();
 		}
-		if (Input.GetButtonDown("Next")) {
+		if (Input.GetButtonDown("Next") && !sc.isSpeedrunning) {
 			NextLevel();
 		}
-		if (Input.GetButtonDown("Previous")) {
+		if (Input.GetButtonDown("Previous") && !sc.isSpeedrunning) {
 			PreviousLevel();
 		}
 
@@ -70,7 +78,7 @@ public class PauseController : MonoBehaviour {
 
 		pastLocation = currentLocation;
 		currentLocation = myRigidbody.transform.position;
-		if (hasStarted && pastLocation == currentLocation && !isPaused && !isInGoal && this.GetComponent<SpriteRenderer>().color.a > 0) { //AUTO RESTART IF STAND STILL FOR OVER X FRAMES
+		if (hasStarted && pastLocation == currentLocation && !isPaused && !isInGoal && this.GetComponent<SpriteRenderer>().color.a > 0 && shouldAutokill) { //AUTO RESTART IF STAND STILL FOR OVER X FRAMES
 			currentRestartFrames++;
 			if (currentRestartFrames > framesToRestart) {
 				SceneManager.LoadScene(SceneManager.GetActiveScene().name); //restart
@@ -98,7 +106,20 @@ public class PauseController : MonoBehaviour {
 	}
 
 	public static void NextLevel() {
-		SceneManager.LoadScene((((SceneManager.GetActiveScene().buildIndex - 2) + 1) % (SceneManager.sceneCountInBuildSettings - 2)) + 2); //offset by 2
+
+		try
+		{
+			var localSC = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<SpeedrunController>();
+			if (localSC.isSpeedrunning && (((SceneManager.GetActiveScene().buildIndex - 2) + 1) % (SceneManager.sceneCountInBuildSettings - 2)) + 2 < ((SceneManager.GetActiveScene().buildIndex - 2))) { //if we jumped back, we are done
+				localSC.finishSpeedrun();
+				SceneManager.LoadScene(1); //back to title
+			} else {
+				SceneManager.LoadScene((((SceneManager.GetActiveScene().buildIndex - 2) + 1) % (SceneManager.sceneCountInBuildSettings - 2)) + 2); //offset by 2
+			}
+		} catch {
+			SceneManager.LoadScene((((SceneManager.GetActiveScene().buildIndex - 2) + 1) % (SceneManager.sceneCountInBuildSettings - 2)) + 2); //offset by 2
+		}
+
 	}
 
 	public static void PreviousLevel() {

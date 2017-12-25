@@ -13,6 +13,8 @@ public class MusicPlayerController : MonoBehaviour, Pausable {
 	public AudioSource secret;
 	public AudioSource death;
 	public AudioSource button;
+	public AudioSource pulseOn;
+	public AudioSource pulseOff;
 
 	// Use this for initialization
 	void Start () {

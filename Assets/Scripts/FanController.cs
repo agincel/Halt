@@ -50,7 +50,7 @@ public class FanController : MonoBehaviour, Pausable {
 	// Update is called once per frame
 	void FixedUpdate ()
 	{
-		if (!PauseController.isPaused) {
+		if (!PauseController.isPaused && strength > 0) {
 			foreach (GameObject g in objectsMoving) {
 				try {
 					if (g.GetComponent<Rigidbody2D> ().velocity.magnitude >= (force * Time.fixedDeltaTime).magnitude && !weak) {
@@ -103,43 +103,52 @@ public class FanController : MonoBehaviour, Pausable {
 		}
 	}
 
-	void OnTriggerExit2D(Collider2D c) {
-		objectsMoving.Remove(c.gameObject);
-		try {
-			if (!PauseController.isPaused) {
-				c.gameObject.GetComponent<Rigidbody2D>().gravityScale = c.gameObject.GetComponent<Rigidbody2D>().gravityScale * gravityDivisor;
-				if (c.gameObject.tag == "Player" && c.gameObject.GetComponent<PauseController>().tractorVelocities.Contains(force)) {
-						c.gameObject.GetComponent<PauseController>().tractorVelocities.Remove(force);
+	void OnTriggerExit2D (Collider2D c)
+	{
+		if (strength > 0) {
+			objectsMoving.Remove (c.gameObject);
+			try {
+				if (!PauseController.isPaused) {
+					c.gameObject.GetComponent<Rigidbody2D> ().gravityScale = c.gameObject.GetComponent<Rigidbody2D> ().gravityScale * gravityDivisor;
+					if (c.gameObject.tag == "Player" && c.gameObject.GetComponent<PauseController> ().tractorVelocities.Contains (force)) {
+						c.gameObject.GetComponent<PauseController> ().tractorVelocities.Remove (force);
+					}
+				}
+			} catch {
+				;
+			}
+		}
+	}
+
+	public void Pause ()
+	{
+		if (PauseController.hasStarted) {
+			this.GetComponent<SpriteRenderer> ().color = new Color (0, 0, 0, 0);
+
+			if (strength > 0) {
+				foreach (GameObject g in objectsMoving) {
+					g.GetComponent<Rigidbody2D> ().gravityScale = g.GetComponent<Rigidbody2D> ().gravityScale * gravityDivisor;
+
+					if (g.tag == "Player" && g.GetComponent<PauseController> ().tractorVelocities.Contains (force)) {
+						g.GetComponent<PauseController> ().tractorVelocities.Remove (force);
+					}
 				}
 			}
-		} catch {
-			;
 		}
 	}
 
-	public void Pause() {
-		if (PauseController.hasStarted) {
-			this.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+	public void Unpause ()
+	{
+		this.GetComponent<SpriteRenderer> ().color = startingColor;
 
-			foreach(GameObject g in objectsMoving) {
-					g.GetComponent<Rigidbody2D>().gravityScale = g.GetComponent<Rigidbody2D>().gravityScale * gravityDivisor;
+		if (strength > 0) {
+			foreach (GameObject g in objectsMoving) {
+				g.GetComponent<Rigidbody2D> ().gravityScale = g.GetComponent<Rigidbody2D> ().gravityScale / gravityDivisor;
 
-					if (g.tag == "Player" && g.GetComponent<PauseController>().tractorVelocities.Contains(force)) {
-						g.GetComponent<PauseController>().tractorVelocities.Remove(force);
-					}
-			}
-		}
-	}
-
-	public void Unpause() {
-		this.GetComponent<SpriteRenderer>().color = startingColor;
-
-		foreach(GameObject g in objectsMoving) {
-			g.GetComponent<Rigidbody2D>().gravityScale = g.GetComponent<Rigidbody2D>().gravityScale / gravityDivisor;
-
-			if (pullIn) {
-				Vector2 enteringV = g.GetComponent<Rigidbody2D>().velocity;
-				g.GetComponent<Rigidbody2D>().velocity = new Vector2(enteringV.x, enteringV.y / 10);
+				if (pullIn) {
+					Vector2 enteringV = g.GetComponent<Rigidbody2D> ().velocity;
+					g.GetComponent<Rigidbody2D> ().velocity = new Vector2 (enteringV.x, enteringV.y / 10);
+				}
 			}
 		}
 	}

@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 8
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -25,6 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -41,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 7
+  serializedVersion: 11
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -53,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 4
+    serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -66,13 +67,27 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_DirectLightInLightProbes: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
+    m_MixedBakeMode: 1
+    m_BakeBackend: 0
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVRFiltering: 0
+    m_PVRFilteringMode: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousColorSigma: 1
+    m_PVRFilteringAtrousNormalSigma: 1
+    m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_RuntimeCPUUsage: 25
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -89,6 +104,8 @@ NavMeshSettings:
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1001 &26921124
@@ -174,7 +191,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4768106676958644, guid: 8db7f2d0cf6c64a46a7fa6feb23390c1, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8db7f2d0cf6c64a46a7fa6feb23390c1, type: 2}
@@ -224,7 +241,7 @@ Prefab:
     - target: {fileID: 224524455461341434, guid: 7227232e12d254f4b8daa0986e0b3b96,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224524455461341434, guid: 7227232e12d254f4b8daa0986e0b3b96,
         type: 2}
@@ -373,7 +390,7 @@ Prefab:
     - target: {fileID: 20644781439118200, guid: f9059c199e5ffa14abfc753c2382e46e,
         type: 2}
       propertyPath: orthographic size
-      value: 10.75
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9059c199e5ffa14abfc753c2382e46e, type: 2}
@@ -415,7 +432,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4524385175501360, guid: e87e48a844a44104086d4a2b7fe23d50, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e87e48a844a44104086d4a2b7fe23d50, type: 2}
@@ -457,7 +474,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4524385175501360, guid: e87e48a844a44104086d4a2b7fe23d50, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1236111478536364, guid: e87e48a844a44104086d4a2b7fe23d50, type: 2}
       propertyPath: m_Name
@@ -518,12 +535,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4302327574382104, guid: d0f352d90e92ddd479b2fd15f0590ade, type: 2}
       propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 58584219026483684, guid: d0f352d90e92ddd479b2fd15f0590ade,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0f352d90e92ddd479b2fd15f0590ade, type: 2}
@@ -673,7 +685,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4744683670887656, guid: a18ffee4c1ee2cd47bec4379974d4bbf, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 212503669262850126, guid: a18ffee4c1ee2cd47bec4379974d4bbf,
         type: 2}

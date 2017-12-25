@@ -12,7 +12,7 @@ public class BasicTransition : MonoBehaviour {
 	public RectTransform blackTop, blackBottom;
 	public transitionState tState;
 
-	float topOut = 150, topIn = -150, bottomOut = -150, bottomIn = 150;
+	float topOut = 200, topIn = -200, bottomOut = -200, bottomIn = 200;
 
 	float closeInCurrent = 0, closeOutCurrent = 0;
 	public static float tTotal = 0.5f;

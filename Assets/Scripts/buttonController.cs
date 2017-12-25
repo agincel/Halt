@@ -32,7 +32,11 @@ public class buttonController : MonoBehaviour {
 			s.color = new Color (s.color.r, s.color.g, s.color.b, 0); //set to invisible
 			isPressed = true;
 
-			GameObject.FindGameObjectWithTag("MusicPlayer").GetComponent<MusicPlayerController>().button.Play();
+			try {
+				GameObject.FindGameObjectWithTag("MusicPlayer").GetComponent<MusicPlayerController>().button.Play();
+			} catch {
+				;
+			}
 		}
 	}
 }
