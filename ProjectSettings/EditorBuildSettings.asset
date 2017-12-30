@@ -105,5 +105,11 @@ EditorBuildSettings:
     path: Assets/Scenes/L31 - Cube 1.unity
     guid: e6ff4a6b18c0a704a8dcbb6a4110e4a2
   - enabled: 1
-    path: Assets/Scenes/L33 - Cube 3.unity
+    path: Assets/Scenes/L32 - Cube 2.unity
     guid: 3aec0b8378b7abc48b08a4a02c1ac938
+  - enabled: 1
+    path: Assets/Scenes/L33 - Cube 3.unity
+    guid: a19bd785a9a81ca4688c0383dc827e6a
+  - enabled: 1
+    path: Assets/Scenes/L34 - Cube 4.unity
+    guid: 8ce116f57839c234f9cd8232028426a2
