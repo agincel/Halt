@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/L14 - BringTogether1.unity
+- path: Assets/Scenes/L19 - MovingRed.unity
   isLoaded: 1
   isActive: 1
