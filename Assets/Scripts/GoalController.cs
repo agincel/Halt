@@ -37,6 +37,11 @@ public class GoalController : MonoBehaviour {
 		won = true;
 		foreach(Image i in c.gameObject.GetComponent<PauseController>().HUD.UIButtons) {
 			i.color = new Color(255, 255, 255, 0); //set them to invisible
+            Text t = i.GetComponentInChildren<Text>();
+            if (t)
+            {
+                t.color = new Color(0, 0, 0, 0);
+            }
 		}
 		c.gameObject.GetComponent<PauseController>().isInGoal = true;
 

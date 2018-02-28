@@ -69,6 +69,11 @@ public class HudController : MonoBehaviour, Pausable {
 
 		foreach(Image m in UIButtons) {
 			m.color = new Color(255, 255, 255, 0); //white but invisible
+            Text t = m.GetComponentInChildren<Text>();
+            if (t)
+            {
+                t.color = new Color(0, 0, 0, 0);
+            }
 		}
 
 		blackBarHeight = blackBarTop.rect.height * .425f;
@@ -129,6 +134,11 @@ public class HudController : MonoBehaviour, Pausable {
 
 			foreach(Image i in UIButtons) {
 				i.color = new Color(255, 255, 255, LeanTween.linear(0, 0.45f, lerpOutCurrent / lerpOutTotal));
+                Text t = i.GetComponentInChildren<Text>();
+                if (t)
+                {
+                    t.color = new Color(0, 0, 0, LeanTween.linear(0, 0.45f, lerpOutCurrent / lerpOutTotal));
+                }
 			}
 
 

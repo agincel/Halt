@@ -110,11 +110,13 @@ public class PauseController : MonoBehaviour {
 		try
 		{
 			var localSC = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<SpeedrunController>();
-			if (localSC.isSpeedrunning && (((SceneManager.GetActiveScene().buildIndex - 2) + 1) % (SceneManager.sceneCountInBuildSettings - 2)) + 2 < ((SceneManager.GetActiveScene().buildIndex - 2))) { //if we jumped back, we are done
-				localSC.finishSpeedrun();
+			if ((((SceneManager.GetActiveScene().buildIndex - 2) + 1) % (SceneManager.sceneCountInBuildSettings - 2)) + 2 < ((SceneManager.GetActiveScene().buildIndex - 2))) { //if we jumped back, we are done
+                if (localSC.isSpeedrunning)
+                    localSC.finishSpeedrun();
 				SceneManager.LoadScene(1); //back to title
 			} else {
-				SceneManager.LoadScene((((SceneManager.GetActiveScene().buildIndex - 2) + 1) % (SceneManager.sceneCountInBuildSettings - 2)) + 2); //offset by 2
+                if (!localSC.isSpeedrunning)
+				    SceneManager.LoadScene((((SceneManager.GetActiveScene().buildIndex - 2) + 1) % (SceneManager.sceneCountInBuildSettings - 2)) + 2); //offset by 2
 			}
 		} catch {
 			SceneManager.LoadScene((((SceneManager.GetActiveScene().buildIndex - 2) + 1) % (SceneManager.sceneCountInBuildSettings - 2)) + 2); //offset by 2
@@ -123,10 +125,14 @@ public class PauseController : MonoBehaviour {
 	}
 
 	public static void PreviousLevel() {
-		int prevScene = SceneManager.GetActiveScene().buildIndex - 1;
-		if (prevScene < 2)
-			prevScene = SceneManager.sceneCountInBuildSettings - 1;
-		SceneManager.LoadScene(prevScene);
+        var localSC = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<SpeedrunController>();
+        if (!localSC || !localSC.isSpeedrunning)
+        {
+            int prevScene = SceneManager.GetActiveScene().buildIndex - 1;
+            if (prevScene < 2)
+                prevScene = SceneManager.sceneCountInBuildSettings - 1;
+            SceneManager.LoadScene(prevScene);
+        }
 	}
 
 	public static void Restart() {

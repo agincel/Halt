@@ -42,10 +42,36 @@ public class UIButtonScript : MonoBehaviour, IPointerClickHandler {
 			if (type == UIButtonType.TitleBegin) {
 				this.GetComponentInParent<BasicTransition>().changeState(transitionState.closeIn);
 				StartCoroutine(NextScreen());
-			} else if (type == UIButtonType.BackToTitle) { //hacky, using back to title to start level 1 on space press
-				SceneManager.LoadScene(2); //level 1
+                
+            } else if (type == UIButtonType.BackToTitle) { //hacky, using back to title to start level 1 on space press
+				//SceneManager.LoadScene(2); //level 1
 			}
 		}
+
+        if (Input.GetButtonDown("Menu") && (type == UIButtonType.Home || type == UIButtonType.BackToTitle))
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+                SceneManager.LoadScene(0);
+            else
+                SceneManager.LoadScene(1);
+
+            var localSC = GameObject.FindGameObjectWithTag("LevelInfo").GetComponent<SpeedrunController>();
+            if (localSC && localSC.isSpeedrunning)
+                localSC.clearSpeedrun();
+        }
+
+        if (Input.GetButtonDown("Restart") && type == UIButtonType.Restart)
+        {
+            PauseController.Restart();
+        }
+        if (Input.GetButtonDown("Next") && type == UIButtonType.Next)
+        {
+            PauseController.NextLevel();
+        }
+        if (Input.GetButtonDown("Previous") && type == UIButtonType.Previous)
+        {
+            PauseController.PreviousLevel();
+        }
 	}
 
 	public void OnPointerClick (PointerEventData eventData)

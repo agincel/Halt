@@ -100,7 +100,27 @@ public class SpeedrunController : MonoBehaviour {
 
 		currentRun.runTotalTime = (float)(currentRun.completeTime - currentRun.startTime).TotalSeconds;
 
-		if (currentRun.runTotalTime < currentRun.bestTime) {
+        List<float> times = new List<float>();
+        bool hasAdded = false;
+        int leaderboardSize = 5;
+        for (int i = 0; i < leaderboardSize; i++)
+        {
+            float f = PlayerPrefs.GetFloat("leader" + i.ToString(), -1f);
+            if (!hasAdded && (f <= 0 || currentRun.runTotalTime < f))
+            {
+                times.Add(currentRun.runTotalTime);
+                hasAdded = true;
+            }
+            times.Add(f);
+        }
+
+        for (int i = 0; i < leaderboardSize; i++)
+        {
+            PlayerPrefs.SetFloat("leader" + i.ToString(), times[i]);
+        }
+
+
+        if (currentRun.runTotalTime < currentRun.bestTime) {
 			currentRun.bestTime = currentRun.runTotalTime;
 		}
 
