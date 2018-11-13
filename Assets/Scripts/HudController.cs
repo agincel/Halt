@@ -38,6 +38,8 @@ public class HudController : MonoBehaviour, Pausable {
 	float endLevelCurrent = 0;
 	float endLevelTotal = 0.65f;
 
+    float blackBarHalf = 450;
+
 
 
 
@@ -86,7 +88,7 @@ public class HudController : MonoBehaviour, Pausable {
 
 		state = hudState.lerpIn;
 		startX = -750f;
-		endX = 900f;
+		endX = 1100f;
 
 		//set level text
 		levelDisplay.GetComponentInParent<Text>().text = "Level " + (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex - 1).ToString();
@@ -113,8 +115,8 @@ public class HudController : MonoBehaviour, Pausable {
 			/*
 			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeOutBack(startTopY, startTopY - blackBarHeight, lerpInCurrent / lerpInTotal, 0.35f));
 			blackBarBottom.anchoredPosition = new Vector2(0, LeanTween.easeOutBack(startBottomY, startBottomY + blackBarHeight, lerpInCurrent / lerpInTotal, 0.35f));*/
-			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeOutSine(-200, 200, lerpInCurrent / lerpInTotal));
-			blackBarBottom.anchoredPosition = new Vector2(0, LeanTween.easeOutSine(200, -200, lerpInCurrent / lerpInTotal));
+			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeOutSine(-blackBarHalf, blackBarHalf, lerpInCurrent / lerpInTotal));
+			blackBarBottom.anchoredPosition = new Vector2(0, LeanTween.easeOutSine(blackBarHalf, -blackBarHalf, lerpInCurrent / lerpInTotal));
 
 		}
 		else if (state == hudState.lerpOut) {
@@ -128,8 +130,8 @@ public class HudController : MonoBehaviour, Pausable {
 			levelDisplay.anchoredPosition = new Vector2(LeanTween.easeInBack(midX, endX, lerpOutCurrent / lerpOutTotal, 0.35f), 0);
 			/*blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeOutBack(startTopY - blackBarHeight, startTopY, lerpOutCurrent / lerpOutTotal, 0.35f));
 			blackBarBottom.anchoredPosition = new Vector2(0, LeanTween.easeOutBack(startBottomY + blackBarHeight, startBottomY, lerpOutCurrent / lerpOutTotal, 0.35f));*/
-			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeOutSine(midTop, 200, lerpOutCurrent / lerpOutTotal));
-			blackBarBottom.anchoredPosition = new Vector2(0,LeanTween.easeOutSine(midBottom, -200, lerpOutCurrent / lerpOutTotal));
+			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeOutSine(midTop, blackBarHalf, lerpOutCurrent / lerpOutTotal));
+			blackBarBottom.anchoredPosition = new Vector2(0,LeanTween.easeOutSine(midBottom, -blackBarHalf, lerpOutCurrent / lerpOutTotal));
 
 
 			foreach(Image i in UIButtons) {
@@ -150,8 +152,8 @@ public class HudController : MonoBehaviour, Pausable {
 				PauseController.NextLevel(); //GO TO NEXT LEVEL
 			}
 
-			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeInSine(200, -200, Mathf.Clamp(endLevelCurrent, 0, endLevelTotal) / endLevelTotal));
-			blackBarBottom.anchoredPosition = new Vector2(0, LeanTween.easeInSine(-200, 200, Mathf.Clamp(endLevelCurrent, 0, endLevelTotal) / endLevelTotal));
+			blackBarTop.anchoredPosition = new Vector2(0, LeanTween.easeInSine(blackBarHalf, -blackBarHalf, Mathf.Clamp(endLevelCurrent, 0, endLevelTotal) / endLevelTotal));
+			blackBarBottom.anchoredPosition = new Vector2(0, LeanTween.easeInSine(-blackBarHalf, blackBarHalf, Mathf.Clamp(endLevelCurrent, 0, endLevelTotal) / endLevelTotal));
 		}
 
 

@@ -22,7 +22,7 @@ public class hiddenCollectibleController : MonoBehaviour {
 			}
 			mySprite.color = new Color (mySprite.color.r, mySprite.color.g, mySprite.color.b, 255);
 			collected = true;
-			LeanTween.move(this.gameObject, new Vector3(this.transform.position.x, this.transform.position.y + 30, 0), 1f).setEaseInBack().setOvershoot(0.3f);
+			LeanTween.move(this.gameObject, new Vector3(this.transform.position.x, this.transform.position.y + 55, 0), 1f).setEaseInBack().setOvershoot(0.3f);
 			PauseController.calculateDiamonds();
 		}
 	}

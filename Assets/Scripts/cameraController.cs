@@ -19,7 +19,7 @@ public class cameraController : MonoBehaviour, Pausable {
 
 
 	float colorLerpTotal = 10f;
-	float colorLerpCurrent = 5f;
+	float colorLerpCurrent = 0f;
 	bool aToB = false;
 
 
@@ -40,8 +40,8 @@ public class cameraController : MonoBehaviour, Pausable {
 		//bg color
 		colors = new Color[2];
 		inverted = new Color[2];
-		colors[0] = new Color(120f / 255f, 135f / 255f, 165f / 255f, 1);
-		colors[1] = new Color(141f / 255f, 175f / 255f, 103f / 255f, 1);
+		colors[0] = new Color(237f / 255f, 22f / 255f, 131f / 255f, 1);
+		colors[1] = new Color(189f / 255f, 212f / 255f, 68f / 255f, 1);
 		for(var i = 0; i < 2; i++)
 			inverted[i] = new Color(1 - colors[i].r, 1 - colors[i].g, 1 - colors[i].b);
 
